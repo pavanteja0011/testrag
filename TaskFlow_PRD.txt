@@ -1,0 +1,65 @@
+TaskFlow — Product Requirements Document
+========================================
+Version: 1.0 | Status: In Development
+
+OVERVIEW
+--------
+TaskFlow is a team task management platform for engineering teams.
+Projects, tasks, comments, and roles are the core entities.
+The product ships in two phases: v1.0 (core) and v1.1 (notifications, reports).
+
+=== AUTHENTICATION (REQ-001 to REQ-005) ===
+REQ-001: Users can register with name, email, and password. Passwords hashed with bcrypt.
+REQ-002: Users can log in and receive a signed JWT (7-day expiry).
+REQ-003: GET /api/auth/me returns the authenticated user's profile.
+REQ-004: Users can reset password via email link. [NOT IMPLEMENTED — v1.1]
+REQ-005: JWT refresh token endpoint for seamless re-auth. [NOT IMPLEMENTED — v1.1]
+
+=== USER MANAGEMENT (REQ-006 to REQ-008) ===
+REQ-006: Each user has a globalRole: "user" or "admin".
+REQ-007: Admin users can deactivate accounts. Deactivated users cannot log in.
+REQ-008: Each user has an avatarColor (hex) auto-assigned on registration for UI avatars.
+
+=== PROJECTS (REQ-009 to REQ-013) ===
+REQ-009: Users can create projects with name, description, and color.
+REQ-010: Project members have roles: viewer, member, or admin.
+REQ-011: Project admins can invite members by email.
+REQ-012: Project admins can archive projects. Archived projects are hidden by default. [NOT IMPLEMENTED — v1.1]
+REQ-013: Each project has an activity feed showing who changed what and when. [NOT IMPLEMENTED — v1.1]
+
+=== TASKS (REQ-014 to REQ-021) ===
+REQ-014: Tasks belong to a project and have: title, description, assignee, priority, status, dueDate, tags.
+REQ-015: Priority levels: low, medium, high, urgent.
+REQ-016: Status lifecycle: todo → in-progress → in-review → done (or → cancelled from any state).
+REQ-017: Status transitions are enforced server-side — invalid transitions are rejected with 400.
+REQ-018: Tasks can be assigned to any project member.
+REQ-019: Task deletion requires cascade removal of all comments. [NOT IMPLEMENTED — v1.1]
+REQ-020: Bulk status update for multiple tasks at once. [NOT IMPLEMENTED — v1.1]
+REQ-021: Task search by keyword across title and description. [NOT IMPLEMENTED — v1.1]
+
+=== COMMENTS (REQ-022 to REQ-025) ===
+REQ-022: Project members can add comments to any task in the project.
+REQ-023: Comment authors can edit their comment within 24 hours. [NOT IMPLEMENTED — v1.1]
+REQ-024: Comment authors can delete their own comment; project admins can delete any. [NOT IMPLEMENTED — v1.1]
+REQ-025: @mention users in comments — mentioned users get notified. [NOT IMPLEMENTED — v1.1]
+
+=== NOTIFICATIONS (REQ-026 to REQ-030) ===
+REQ-026: Users receive in-app notifications when assigned to a task. [NOT IMPLEMENTED — v1.1]
+REQ-027: Users are notified when a task they own changes status. [NOT IMPLEMENTED — v1.1]
+REQ-028: Users are notified when @mentioned in a comment. [NOT IMPLEMENTED — v1.1]
+REQ-029: Users can mark notifications as read individually or all at once. [NOT IMPLEMENTED — v1.1]
+REQ-030: Users can set notification preferences (email vs in-app). [NOT IMPLEMENTED — v1.1]
+
+=== FILE ATTACHMENTS (REQ-031 to REQ-032) ===
+REQ-031: Users can attach files to tasks (images, PDFs, docs). [NOT IMPLEMENTED — v1.1]
+REQ-032: Attached files are stored in S3-compatible object storage. [NOT IMPLEMENTED — v1.1]
+
+=== REPORTING (REQ-033 to REQ-040) ===
+REQ-033: Dashboard shows tasks by status, due today, and overdue count.
+REQ-034: Project-level velocity report (tasks completed per week). [NOT IMPLEMENTED — v1.1]
+REQ-035: Per-user workload view (tasks assigned, by priority). [NOT IMPLEMENTED — v1.1]
+REQ-036: CSV export of task list with all fields. [NOT IMPLEMENTED — v1.1]
+REQ-037: Overdue tasks trigger automatic priority escalation. [NOT IMPLEMENTED — v1.1]
+REQ-038: Search across all projects and tasks. [NOT IMPLEMENTED — v1.1]
+REQ-039: Audit log for all data mutations (who changed what). [NOT IMPLEMENTED — v1.1]
+REQ-040: Admin can view full audit log filtered by user or date. [NOT IMPLEMENTED — v1.1]
