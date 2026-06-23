@@ -9,7 +9,7 @@ Team task management platform. JWT auth, project-based RBAC, task lifecycle enfo
 | POST | /api/auth/login | ✅ Implemented |
 | GET  | /api/auth/me | ✅ Implemented |
 | POST | /api/auth/reset-password | ❌ 501 — v1.1 |
-| POST | /api/auth/refresh | ❌ 501 — v1.1 |
+| POST | /api/auth/refresh | ❌ 501 — v1.1
 
 ## Projects
 | Method | Path | Status |
